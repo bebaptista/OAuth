@@ -6,20 +6,54 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script>
         var token = '';
-        var client_id = '208ebfa704654808b26c0f54521682f1'; // Application ID - Substitua pelo seu APP ID
-        var url = 'https://tecweb-rommel.azurewebsites.net/oauth2/index.html'; // URL da sua página - Substitua pela sua
-        var audio;
-
-        // Função para obter parametros passados via Query String
-        function getSpotifyVariable(variable) {
-            var query = window.location.hash.substring(1);
-            var vars = query.split("&");
-            for (var i = 0; i < vars.length; i++) {
-                var pair = vars[i].split("=");
-                if (pair[0] == variable) { return pair[1]; }
-            }
-            return (false);
+        var tokenB = '';
+        var client_id = '451a2aef8668b16df07b'; // Application ID - Substitua pelo seu APP ID
+        var client_secret = '0349d8b78c083ac299cd7b3fb7edfb574867449b'
+        var url = 'https://bebaptista.github.io/OAuth/index.html'; // URL da sua página - Substitua pela sua
+        if(!token){
+        	window.location = 'https://github.com/login/oauth/authorize?client_id=' + client_id + '&response_type=token&redirect_uri=' + url;
+        	token = "hello";
         }
+        else if(!tokenB){
+        	token = getParameterByName();
+        	token = token.code;
+        	
+        	var url2 = 'https://github.com/login/oauth/access_token?client_id=' + client_id + '&client_secret=' + client_secret + '&code=' + token +'&response_type=token&redirect_uri=' + url;
+        	
+        	$.ajax({
+        		url: url2,
+        		type: "POST",
+        		success: function(data){
+        			tokenB = data.access_token;
+        		}
+        	});
+
+        }
+        else {
+        	alert("Hello");
+        }
+        
+        
+        /*if(!tokenB){
+        	var tokenB = getParameterByName();
+        	tokenB = tokenB.code;
+        	var url2 = 'https://github.com/login/oauth/authorize?client_id=' + client_id + '&client_secret=' + client_secret + '&token=' + tokenB +'&response_type=token&redirect_uri=' + url;
+        }*/
+        
+         
+		
+		function getParameterByName() {
+			var result = {}, keyValuePairs = location.search.slice(1).split("&");
+			keyValuePairs.forEach(function (keyValuePair) {
+				keyValuePair = keyValuePair.split('=');
+				result[decodeURIComponent(keyValuePair[0])] = decodeURIComponent(keyValuePair[1]) || '';
+			});
+			return result;
+		}
+		
+		
+		
+        // Função para obter parametros passados via Query String
 
         function executaConsulta() {
             $.ajax({
@@ -48,16 +82,10 @@
             });
         }
 
-        function play(url) {
-            audio = new Audio(url);
-            audio.play();
-        }
-
         // Verifica se a token foi passada na URL, senão desvia 
         // para o Spotify para pegar a token de acesso       
-        token = getSpotifyVariable('access_token');
-        if (!token)
-            window.location = 'https://accounts.spotify.com/authorize?client_id=' + client_id + '&response_type=token&redirect_uri=' + url;
+        //if (!token)
+            
     </script>
     <title>Document</title>
     <style>
@@ -69,7 +97,7 @@
 </head>
 
 <body>
-    <div id="topo"> Rommel Music </div>
+    <div id="topo"> Bernardo </div>
     <input type="text" id="query"> <button onclick="executaConsulta()">Consulta</button>
     <div id="conteudo"></div>
     <div id="rodape">Copyright 2017</div>

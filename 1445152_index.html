@@ -6,7 +6,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script>
         var token = '';
-        var tokenB = '';
+        var accessToken = '';
         var client_id = '451a2aef8668b16df07b'; // Application ID - Substitua pelo seu APP ID
         var client_secret = '0349d8b78c083ac299cd7b3fb7edfb574867449b'
         var url = 'https://bebaptista.github.io/OAuth/1445152_index.html'; // URL da sua página - Substitua pela sua
@@ -14,26 +14,23 @@
         if(url === location.href){
         	window.location = 'https://github.com/login/oauth/authorize?client_id=' + client_id + '&response_type=code&redirect_uri=' + url;
         }
-        else if(!tokenB){
-        	token = getParameterByName();
+        else if(!accessToken){
+        	var locationToken = location.search.slice(1).split("&");
+        	token = getParameterByName(locationToken);
         	token = token.code;
+        	
+        	var corUrl = 'https://cors.io/?';
         	
         	var url2 = 'https://github.com/login/oauth/access_token?client_id=' + client_id + '&client_secret=' + client_secret + '&code=' + token +'&response_type=code&redirect_uri=' + url;
         	
-        	$.ajax({
-        		url: url2,
-        		type: "GET",
-        		
-        		success: function(data){
-        			tokenB = data.access_token;
-        		}
+        	$.get(corsUrl + url2, function (data){
+        		accessToken = data.split("&");
+        		accessToken = getParameterByName(accessToken);
+        		accessToken = accessToken.accessToken;
+        		alert(accessToken);
         	});
 
         }
-        else {
-        	alert("Hello");
-        }
-        
         
         /*if(!tokenB){
         	var tokenB = getParameterByName();
@@ -43,8 +40,8 @@
         
          
 		
-		function getParameterByName() {
-			var result = {}, keyValuePairs = location.search.slice(1).split("&");
+		function getParameterByName(parametro) {
+			var result = {}, keyValuePairs = parametro;
 			keyValuePairs.forEach(function (keyValuePair) {
 				keyValuePair = keyValuePair.split('=');
 				result[decodeURIComponent(keyValuePair[0])] = decodeURIComponent(keyValuePair[1]) || '';

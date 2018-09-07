@@ -51,7 +51,7 @@
 		
 		function executaConsulta(){
 			$.get('https://api.github.com/user?access_token='+accessToken, function (data){
-				$('#conteudo').html('<p>Total de Musicas: ' + data + '</p>';
+				$('#conteudo').html('<p>' + data + '</p>';
 			});
 		}
 		
@@ -93,7 +93,7 @@
     <style>
         #topo,
         #rodape {
-            background-color: Yellow;
+            background-color: Blue;
         }
     </style>
 </head>
@@ -102,7 +102,7 @@
     <div id="topo"> Bernardo </div>
     <input type="text" id="query"> <button onclick="executaConsulta()">Consulta</button>
     <div id="conteudo"></div>
-    <div id="rodape">Copyright 2017</div>
+    <div id="rodape">Copyright 2018</div>
 </body>
 
 </html>

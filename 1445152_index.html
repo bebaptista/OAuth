@@ -49,10 +49,14 @@
 			return result;
 		}
 		
-		
+		function executaConsulta(){
+			$.get('https://api.github.com/user?access_token='+accessToken, function (data){
+				$('#conteudo').html('<p>Total de Musicas: ' + data + '</p>';
+			});
+		}
 		
         // Função para obter parametros passados via Query String
-
+/*
         function executaConsulta() {
             $.ajax({
                 url: 'https://api.github.com/user?access_token='+ access_token +,
@@ -79,7 +83,7 @@
                 }
             });
         }
-
+*/
         // Verifica se a token foi passada na URL, senão desvia 
         // para o Spotify para pegar a token de acesso       
         //if (!token)

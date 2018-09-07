@@ -51,7 +51,7 @@
 		
 		function executaConsulta(){
 			$.get('https://api.github.com/user?access_token='+accessToken, function (data){
-				$('#conteudo').html('<p>' + data + '</p>';
+				$('#conteudo').html('<p>' + data + '</p>');
 			});
 		}
 		

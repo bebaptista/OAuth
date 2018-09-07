@@ -27,7 +27,6 @@
         		accessToken = data.split("&");
         		accessToken = getParameterByName(accessToken);
         		accessToken = accessToken.access_token;
-        		alert(accessToken);
         	});
 
         }
@@ -50,9 +49,7 @@
 		}
 		
 		function executaConsulta(){
-			$.get('https://api.github.com/user?access_token='+accessToken, function (data){
-				$('#conteudo').html('<p>' + data + '</p>');
-			});
+			$.get('https://api.github.com/user?access_token='+accessToken);
 		}
 		
         // Função para obter parametros passados via Query String
@@ -100,7 +97,7 @@
 
 <body>
     <div id="topo"> Seu repositorio </div>
-    <input type="text" id="query"> <button onclick="executaConsulta()">Consulta</button>
+		<button onclick="executaConsulta()">Consulta</button>
     <div id="conteudo"></div>
     <div id="rodape">Copyright 2018</div>
 </body>

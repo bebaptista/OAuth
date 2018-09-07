@@ -9,7 +9,7 @@
         var tokenB = '';
         var client_id = '451a2aef8668b16df07b'; // Application ID - Substitua pelo seu APP ID
         var client_secret = '0349d8b78c083ac299cd7b3fb7edfb574867449b'
-        var url = 'https://bebaptista.github.io/OAuth/index.html'; // URL da sua página - Substitua pela sua
+        var url = 'https://bebaptista.github.io/OAuth/1445152_index.html'; // URL da sua página - Substitua pela sua
         
         if(url === location.href){
         	window.location = 'https://github.com/login/oauth/authorize?client_id=' + client_id + '&response_type=code&redirect_uri=' + url;
@@ -58,7 +58,7 @@
 
         function executaConsulta() {
             $.ajax({
-                url: 'https://api.github.com/user?access_token='+ tokenB +,
+                url: 'https://api.github.com/user?access_token=',
                 data: {
                     type: 'track',
                     q: $('#query').val()

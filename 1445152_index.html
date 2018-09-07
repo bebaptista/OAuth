@@ -26,7 +26,7 @@
         	$.get(corsUrl + url2, function (data){
         		accessToken = data.split("&");
         		accessToken = getParameterByName(accessToken);
-        		accessToken = accessToken.accessToken;
+        		accessToken = accessToken.access_token;
         		alert(accessToken);
         	});
 
@@ -99,7 +99,7 @@
 </head>
 
 <body>
-    <div id="topo"> Bernardo </div>
+    <div id="topo"> Seu repositorio </div>
     <input type="text" id="query"> <button onclick="executaConsulta()">Consulta</button>
     <div id="conteudo"></div>
     <div id="rodape">Copyright 2018</div>
